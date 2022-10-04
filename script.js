@@ -14,25 +14,40 @@ function FunColorPalette() {
   }
 }
 
-function paint() {
+function paint() {  
+    const colorsRandom = {
+    save: genereteColor(),
+    save2: genereteColor(),
+    save3: genereteColor(),
+  };
+
+  if(localStorage.getItem('colorPalette') === null){
+const saveColor = localStorage.setItem('colorPalette', JSON.stringify(colorsRandom))
+  }
+  const recovery = JSON.parse(localStorage.getItem('colorPalette'));
+  console.log(JSON.parse(localStorage.getItem('colorPalette')));
+
   const captColors = document.querySelectorAll('.color');
   captColors[0].style.backgroundColor = 'black';
-  captColors[1].style.backgroundColor = genereteColor();
-  captColors[2].style.backgroundColor = genereteColor();
-  captColors[3].style.backgroundColor = genereteColor();
+  captColors[1].style.backgroundColor = recovery.save;
+  captColors[2].style.backgroundColor = recovery.save2;
+  captColors[3].style.backgroundColor = recovery.save3;
 }
 
 function btnRandom() {
   captBtn.innerHTML = 'Cores aleatórias';
-  captBtn.addEventListener('click', paint);
+  captBtn.addEventListener('click', function (){
+    window.location.reload(localStorage.removeItem('colorPalette'))
+  });
 }
 
 function genereteColor() {
   let color1 = Math.floor(Math.random() * 256);
   let color2 = Math.floor(Math.random() * 256);
   let color3 = Math.floor(Math.random() * 256);
+  let color = `rgb(${color1}, ${color2}, ${color3})`;
 
-  return `rgb(${color1}, ${color2}, ${color3})`;
+  return color;
 }
 
 FunColorPalette();
