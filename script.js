@@ -1,5 +1,6 @@
 const captColorPalette = document.getElementById('color-palette');
 const captBtn = document.getElementById('button-random-color');
+const captBoard = document.getElementById('pixel-board');
 
 function FunColorPalette() {
   captColorPalette.style.display = 'flex';
@@ -14,18 +15,20 @@ function FunColorPalette() {
   }
 }
 
-function paint() {  
-    const colorsRandom = {
+function paint() {
+  const colorsRandom = {
     save: genereteColor(),
     save2: genereteColor(),
     save3: genereteColor(),
   };
 
-  if(localStorage.getItem('colorPalette') === null){
-const saveColor = localStorage.setItem('colorPalette', JSON.stringify(colorsRandom))
+  if (localStorage.getItem('colorPalette') === null) {
+    const saveColor = localStorage.setItem(
+      'colorPalette',
+      JSON.stringify(colorsRandom)
+    );
   }
   const recovery = JSON.parse(localStorage.getItem('colorPalette'));
-  console.log(JSON.parse(localStorage.getItem('colorPalette')));
 
   const captColors = document.querySelectorAll('.color');
   captColors[0].style.backgroundColor = 'black';
@@ -36,8 +39,8 @@ const saveColor = localStorage.setItem('colorPalette', JSON.stringify(colorsRand
 
 function btnRandom() {
   captBtn.innerHTML = 'Cores aleatórias';
-  captBtn.addEventListener('click', function (){
-    window.location.reload(localStorage.removeItem('colorPalette'))
+  captBtn.addEventListener('click', function () {
+    window.location.reload(localStorage.removeItem('colorPalette'));
   });
 }
 
@@ -50,9 +53,23 @@ function genereteColor() {
   return color;
 }
 
+function creteDivs(size) {
+  captBoard.style.border = '1px solid black';
+  captBoard.style.width = '350px';
+  captBoard.style.height = '350px';
+
+  for (let i = 0; i < size; i += 1) {
+    const createDiv = document.createElement('div');
+    createDiv.className = 'pixel';
+    createDiv.style.backgroundColor = '#fff';
+    captBoard.appendChild(createDiv);
+  }
+}
+
 FunColorPalette();
 paint();
 btnRandom();
 genereteColor();
+creteDivs(25);
 
 console.log('tudo ok');
