@@ -120,4 +120,4 @@ selectedColor();
 paintPixels();
 btnClear();
 
-console.log('tudo ok');
+console.log('tudo ok')
