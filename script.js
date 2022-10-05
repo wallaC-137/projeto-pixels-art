@@ -55,13 +55,18 @@ function genereteColor() {
 
 function creteDivs(size) {
   captBoard.style.border = '1px solid black';
-  captBoard.style.width = '350px';
-  captBoard.style.height = '350px';
-
+  captBoard.style.width = '210px';
+  captBoard.style.height = '225px';
+  captBoard.style.marginTop = '30px';
+  
   for (let i = 0; i < size; i += 1) {
     const createDiv = document.createElement('div');
     createDiv.className = 'pixel';
     createDiv.style.backgroundColor = '#fff';
+    createDiv.style.width = '40px';
+    createDiv.style.height = '40px';
+    createDiv.style.border = '1px solid black';
+    createDiv.style.display = 'inline-block';
     captBoard.appendChild(createDiv);
   }
 }
