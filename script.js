@@ -8,11 +8,11 @@ function FunColorPalette() {
   for (let i = 0; i < 4; i += 1) {
     const createColors = document.createElement('div');
     createColors.className = 'color';
-    createColors.id = `${i}`
+    createColors.id = `${i}`;
     createColors.style.border = '1px solid black';
     createColors.style.width = '40px';
     createColors.style.height = '40px';
-    if(i === 0){
+    if (i === 0) {
       createColors.className += ' selected';
     }
     captColorPalette.appendChild(createColors);
@@ -60,12 +60,13 @@ function genereteColor() {
 function creteDivs(size) {
   captBoard.style.border = '1px solid black';
   captBoard.style.width = '210px';
-  captBoard.style.height = '225px';
+  captBoard.style.height = '210px';
   captBoard.style.marginTop = '30px';
-  
+
   for (let i = 0; i < size; i += 1) {
     const createDiv = document.createElement('div');
     createDiv.className = 'pixel';
+    createDiv.id = `pixel${i}`;
     createDiv.style.backgroundColor = '#fff';
     createDiv.style.width = '40px';
     createDiv.style.height = '40px';
@@ -75,20 +76,28 @@ function creteDivs(size) {
   }
 }
 
-function selectedColor () {
-  
-  captColorPalette.addEventListener('click', function(event){
+function selectedColor() {
+  captColorPalette.addEventListener('click', function (event) {
     const captId = document.getElementById(event.target.id);
-    // captId.className = `color selected`
-    // console.log(captId.id);
-    for(let i = 0; i < 4; i += 1){
+
+    for (let i = 0; i < 4; i += 1) {
       const captColors = document.querySelectorAll('.color');
-      if(captColors[i].id === captId.id){
-        captColors[i].className = `color selected`
-      } else if (captColors[i].id !== captId.id){
-        captColors[i].className = `color`
+      if (captColors[i].id === captId.id) {
+        captColors[i].className = `color selected`;
+      } else if (captColors[i].id !== captId.id) {
+        captColors[i].className = `color`;
       }
-}})
+    }
+  });
+}
+
+function paintPixels() {
+  captBoard.addEventListener('click', function (event) {
+    const captPixels = document.getElementById(event.target.id);
+    const captSelect = document.getElementsByClassName('selected')[0];
+    console.log(captSelect.style.backgroundColor);
+    captPixels.style.backgroundColor = captSelect.style.backgroundColor;
+  });
 }
 
 FunColorPalette();
@@ -97,5 +106,7 @@ btnRandom();
 genereteColor();
 creteDivs(25);
 selectedColor();
+
+paintPixels();
 
 console.log('tudo ok');
