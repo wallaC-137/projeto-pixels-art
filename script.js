@@ -1,6 +1,7 @@
 const captColorPalette = document.getElementById('color-palette');
 const captBtn = document.getElementById('button-random-color');
 const captBoard = document.getElementById('pixel-board');
+const captBtnClear = document.getElementById('clear-board');
 
 function FunColorPalette() {
   captColorPalette.style.display = 'flex';
@@ -100,13 +101,23 @@ function paintPixels() {
   });
 }
 
+function btnClear() {
+  const captPixels = document.querySelectorAll('.pixel');
+  captBtnClear.innerHTML = 'Limpar';
+  captBtnClear.addEventListener('click', function () {
+    for (let i = 0; i < captPixels.length; i += 1) {
+      captPixels[i].style.backgroundColor = '#fff';
+    }
+  });
+}
+
 FunColorPalette();
 paint();
 btnRandom();
 genereteColor();
 creteDivs(25);
 selectedColor();
-
 paintPixels();
+btnClear();
 
 console.log('tudo ok');
