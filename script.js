@@ -11,6 +11,9 @@ function FunColorPalette() {
     createColors.style.border = '1px solid black';
     createColors.style.width = '40px';
     createColors.style.height = '40px';
+    if(i === 0){
+      createColors.className += ' selected';
+    }
     captColorPalette.appendChild(createColors);
   }
 }
@@ -71,10 +74,17 @@ function creteDivs(size) {
   }
 }
 
+function selectedColor () {
+  captColorPalette.addEventListener('click', function(event){
+    console.log(event.target.className)
+  })
+}
+
 FunColorPalette();
 paint();
 btnRandom();
 genereteColor();
 creteDivs(25);
+selectedColor();
 
 console.log('tudo ok');
