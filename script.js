@@ -8,6 +8,7 @@ function FunColorPalette() {
   for (let i = 0; i < 4; i += 1) {
     const createColors = document.createElement('div');
     createColors.className = 'color';
+    createColors.id = `${i}`
     createColors.style.border = '1px solid black';
     createColors.style.width = '40px';
     createColors.style.height = '40px';
@@ -75,9 +76,19 @@ function creteDivs(size) {
 }
 
 function selectedColor () {
+  
   captColorPalette.addEventListener('click', function(event){
-    console.log(event.target.className)
-  })
+    const captId = document.getElementById(event.target.id);
+    // captId.className = `color selected`
+    // console.log(captId.id);
+    for(let i = 0; i < 4; i += 1){
+      const captColors = document.querySelectorAll('.color');
+      if(captColors[i].id === captId.id){
+        captColors[i].className = `color selected`
+      } else if (captColors[i].id !== captId.id){
+        captColors[i].className = `color`
+      }
+}})
 }
 
 FunColorPalette();
