@@ -96,7 +96,6 @@ function paintPixels() {
   captBoard.addEventListener('click', function (event) {
     const captPixels = document.getElementById(event.target.id);
     const captSelect = document.getElementsByClassName('selected')[0];
-    console.log(captSelect.style.backgroundColor);
     captPixels.style.backgroundColor = captSelect.style.backgroundColor;
   });
 }
@@ -111,6 +110,30 @@ function btnClear() {
   });
 }
 
+function savePixels() {
+  let saveBoard = {};
+
+  captBoard.addEventListener('click', function (event) {
+    const captIdPixels = event.target.id;
+    const captBackgroundC = event.target.style.backgroundColor;
+
+    saveBoard[captIdPixels] = captBackgroundC;
+
+    localStorage.setItem('pixelBoard', JSON.stringify(saveBoard));
+    
+  });
+}
+
+function recoverPixels() {
+  const savedPixel = JSON.parse(localStorage.getItem('pixelBoard'));
+  const captPixels = document.querySelectorAll('.pixel');
+
+  for (let i = 0; i < captPixels.length; i += 1) {
+    let captId = document.getElementById(`pixel${i}`);
+    captId.style.backgroundColor = savedPixel['pixel' + i];
+  }
+}
+
 FunColorPalette();
 paint();
 btnRandom();
@@ -119,5 +142,5 @@ creteDivs(25);
 selectedColor();
 paintPixels();
 btnClear();
-
-console.log('tudo ok')
+savePixels();
+recoverPixels();
