@@ -143,4 +143,4 @@ selectedColor();
 paintPixels();
 btnClear();
 savePixels();
-recoverPixels();
+// recoverPixels();
