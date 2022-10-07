@@ -107,6 +107,7 @@ function btnClear() {
     for (let i = 0; i < captPixels.length; i += 1) {
       captPixels[i].style.backgroundColor = '#fff';
     }
+    localStorage.setItem('pixelBoard', null)
   });
 }
 
@@ -120,7 +121,6 @@ function savePixels() {
     saveBoard[captIdPixels] = captBackgroundC;
 
     localStorage.setItem('pixelBoard', JSON.stringify(saveBoard));
-    
   });
 }
 
@@ -128,9 +128,11 @@ function recoverPixels() {
   const savedPixel = JSON.parse(localStorage.getItem('pixelBoard'));
   const captPixels = document.querySelectorAll('.pixel');
 
-  for (let i = 0; i < captPixels.length; i += 1) {
-    let captId = document.getElementById(`pixel${i}`);
-    captId.style.backgroundColor = savedPixel['pixel' + i];
+  if(savedPixel !== null){
+    for (let i = 0; i < captPixels.length; i += 1) {
+      let captId = document.getElementById(`pixel${i}`);
+      captId.style.backgroundColor = savedPixel[`pixel${i}`];
+    }
   }
 }
 
@@ -143,4 +145,4 @@ selectedColor();
 paintPixels();
 btnClear();
 savePixels();
-// recoverPixels();
+recoverPixels();
