@@ -153,29 +153,29 @@ const boardSize = () => {
 
   captBtnVqv.addEventListener('click', (event) => {
     event.preventDefault();
-    const getPixels = document.querySelectorAll('.pixel')
-    // let result = 25;
+    const getPixels = document.querySelectorAll('.pixel');
+
     const valor = Math.abs(captSizeInput.value * captSizeInput.value);
     const valorBoard = Math.abs(captSizeInput.value * 43);
-    
-      for (let i of getPixels) {
-        i.remove();
-      }
-    
+
+    for (let i of getPixels) {
+      i.remove();
+    }
+
     if (valor <= 25) {
-      creteDivs(25, 215)
-    } else if (valor > 25 && captSizeInput.value <= 50 ) {
+      creteDivs(25, 215);
+    } else if (valor > 25 && captSizeInput.value <= 50) {
       captBoard.style.width = `0`;
       for (let i of getPixels) {
         i.remove();
       }
-      creteDivs(valor, valorBoard)
-    } else if(captSizeInput.value > 50 ){
+      creteDivs(valor, valorBoard);
+    } else if (captSizeInput.value > 50) {
       captBoard.style.width = `0`;
       for (let i of getPixels) {
         i.remove();
       }
-      creteDivs(50*50, 50*42)
+      creteDivs(50 * 50, 50 * 42);
     }
 
     if (captSizeInput.value === '') {
