@@ -2,17 +2,22 @@ const captColorPalette = document.getElementById('color-palette');
 const captBtn = document.getElementById('button-random-color');
 const captBoard = document.getElementById('pixel-board');
 const captBtnClear = document.getElementById('clear-board');
+const bSizeInput = document.getElementById('board-size');
 
 function FunColorPalette() {
-  captColorPalette.style.display = 'flex';
+  captColorPalette.style.padding = '10px';
+  captColorPalette.style.display = 'inline-block';
 
   for (let i = 0; i < 4; i += 1) {
     const createColors = document.createElement('div');
     createColors.className = 'color';
     createColors.id = `${i}`;
+    createColors.style.display = 'inline-block';
     createColors.style.border = '1px solid black';
     createColors.style.width = '40px';
     createColors.style.height = '40px';
+    createColors.style.marginLeft = '5px';
+    createColors.style.borderRadius = '5px';
     if (i === 0) {
       createColors.className += ' selected';
     }
@@ -58,10 +63,10 @@ function genereteColor() {
   return color;
 }
 
-function creteDivs(size) {
-  captBoard.style.border = '1px solid black';
-  captBoard.style.width = '210px';
-  captBoard.style.height = '210px';
+function creteDivs(size, sizeBoard) {
+  // captBoard.style.border = '1px solid black';
+  captBoard.style.width = `${sizeBoard}px`;
+  captBoard.style.height = `${sizeBoard}px`;
   captBoard.style.marginTop = '30px';
 
   for (let i = 0; i < size; i += 1) {
@@ -107,7 +112,7 @@ function btnClear() {
     for (let i = 0; i < captPixels.length; i += 1) {
       captPixels[i].style.backgroundColor = '#fff';
     }
-    localStorage.setItem('pixelBoard', null)
+    localStorage.setItem('pixelBoard', null);
   });
 }
 
@@ -128,7 +133,7 @@ function recoverPixels() {
   const savedPixel = JSON.parse(localStorage.getItem('pixelBoard'));
   const captPixels = document.querySelectorAll('.pixel');
 
-  if(savedPixel !== null){
+  if (savedPixel !== null) {
     for (let i = 0; i < captPixels.length; i += 1) {
       let captId = document.getElementById(`pixel${i}`);
       captId.style.backgroundColor = savedPixel[`pixel${i}`];
@@ -136,13 +141,61 @@ function recoverPixels() {
   }
 }
 
+// bonus
+
+const boardSize = () => {
+  const captSizeInput = document.getElementById('board-size');
+  const captBtnVqv = document.getElementById('generate-board');
+
+  if (captSizeInput.value === '') {
+    creteDivs(25, 215);
+  }
+
+  captBtnVqv.addEventListener('click', (event) => {
+    event.preventDefault();
+    const getPixels = document.querySelectorAll('.pixel')
+    // let result = 25;
+    const valor = Math.abs(captSizeInput.value * captSizeInput.value);
+    const valorBoard = Math.abs(captSizeInput.value * 43);
+    
+      for (let i of getPixels) {
+        i.remove();
+      }
+    
+    if (valor <= 25) {
+      creteDivs(25, 215)
+    } else if (valor > 25 ) {
+      captBoard.style.width = `0`;
+      for (let i of getPixels) {
+        i.remove();
+      }
+      creteDivs(valor, valorBoard)
+    } else if(captSizeInput.value > 50 ){
+      captBoard.style.width = `0`;
+      for (let i of getPixels) {
+        i.remove();
+      }
+      creteDivs(50, 50*43)
+    }
+
+    if (captSizeInput.value === '') {
+      alert('Board inválido!');
+    }
+  });
+};
+
 FunColorPalette();
 paint();
 btnRandom();
 genereteColor();
-creteDivs(25);
+// creteDivs(25);
+boardSize(); // ultima criada
 selectedColor();
 paintPixels();
 btnClear();
 savePixels();
 recoverPixels();
+
+const getPixels = document.querySelectorAll('.pixel');
+// console.log(getPixels);
+// console.log(creteDivs(25))
