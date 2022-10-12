@@ -164,7 +164,7 @@ const boardSize = () => {
     
     if (valor <= 25) {
       creteDivs(25, 215)
-    } else if (valor > 25 ) {
+    } else if (valor > 25 && captSizeInput.value <= 50 ) {
       captBoard.style.width = `0`;
       for (let i of getPixels) {
         i.remove();
@@ -175,7 +175,7 @@ const boardSize = () => {
       for (let i of getPixels) {
         i.remove();
       }
-      creteDivs(50, 50*43)
+      creteDivs(50*50, 50*42)
     }
 
     if (captSizeInput.value === '') {
