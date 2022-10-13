@@ -154,15 +154,17 @@ const boardSize = () => {
   captBtnVqv.addEventListener('click', (event) => {
     event.preventDefault();
     const getPixels = document.querySelectorAll('.pixel');
-
     const valor = Math.abs(captSizeInput.value * captSizeInput.value);
     const valorBoard = Math.abs(captSizeInput.value * 43);
 
-    for (let i of getPixels) {
-      i.remove();
+    if (captSizeInput.value >= 5) {
+      localStorageBoard(valor);
     }
 
     if (valor <= 25) {
+      for (let i of getPixels) {
+        i.remove();
+      }
       creteDivs(25, 215);
     } else if (valor > 25 && captSizeInput.value <= 50) {
       captBoard.style.width = `0`;
@@ -184,18 +186,32 @@ const boardSize = () => {
   });
 };
 
+const localStorageBoard = (input) => {
+  localStorage.setItem('boardSize', JSON.stringify(input));
+};
+
+const localSaveBoard = () => {
+  const count = localStorage.boardSize;
+  const valorBoard = Math.sqrt(count) * 43;
+  if (count !== undefined) {
+    captBoard.style.width = `0`;
+    for (let i of getPixels) {
+      i.remove();
+    }
+    creteDivs(count, valorBoard);
+  }
+  console.log(count);
+};
+
 FunColorPalette();
 paint();
 btnRandom();
 genereteColor();
-// creteDivs(25);
 boardSize(); // ultima criada
 selectedColor();
 paintPixels();
 btnClear();
 savePixels();
 recoverPixels();
-
 const getPixels = document.querySelectorAll('.pixel');
-// console.log(getPixels);
-// console.log(creteDivs(25))
+localSaveBoard();

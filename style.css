@@ -1,6 +1,7 @@
 /* *{
     margin: 0%;
     padding: 0%;
+    
 } */
 
 body{
@@ -14,12 +15,9 @@ body{
     margin: auto;
 }
 
-
-
 #main {
     text-align: center;
 }
 #board-size{
     width: 6%;
-    style
 }
