@@ -212,6 +212,7 @@ selectedColor();
 paintPixels();
 btnClear();
 savePixels();
-recoverPixels();
+
 const getPixels = document.querySelectorAll('.pixel');
 localSaveBoard();
+recoverPixels();
